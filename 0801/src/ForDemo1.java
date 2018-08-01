@@ -9,6 +9,8 @@ public class ForDemo1 {
 //		for(int i=0; i<a.length;i++) {
 //			System.out.println(a[i]);
 //		}
+		
+		//강화된 for array , collection 사용
 		for(int num : a){// 출력변수 : 반복대상
 			System.out.println(num);
 		}
