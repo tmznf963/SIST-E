@@ -2,7 +2,7 @@
 public class MethodDemo {
 	public static void main(String[] args) {
 		MethodDemo md = new MethodDemo(); //생성
-		md.calcSum();
+		md.calcSum();//Call By Name (pass by name) 이름호출
 	}
 	
 	void calcSum(){//메소드(function)//멤버변수처럼 불러야한다. 생성자
