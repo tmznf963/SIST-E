@@ -5,18 +5,7 @@ public class MoneyDemo {
 		Scanner scan = new Scanner(System.in);
 		String y_n = null;
 		
-		int [] array ;
-		array = new int[10];
-		array[0] = 50000;
-		array[1] = 10000;
-		array[2] = 5000;
-		array[3] = 1000;
-		array[4] = 500;
-		array[5] = 100;
-		array[6] = 50;
-		array[7] = 10;
-		array[8] = 5;
-		array[9] = 1;
+		int [] array = {50000,10000,5000,1000,500,100,50,10,5,1};
 		
 		do {
 			System.out.print("얼마 입력? ");
@@ -27,7 +16,7 @@ public class MoneyDemo {
 				money = money%array[i];
 			}
 			System.out.print("계속 하시겠습니까? (y_n) : ");
-			y_n = scan.nextLine();
+			y_n = scan.next();
 			
 		}while(y_n.equals("y") || y_n.equals("Y"));
 	}

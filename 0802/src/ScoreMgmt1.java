@@ -2,10 +2,10 @@ import java.util.Scanner;
 public class ScoreMgmt1 {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		Student [] std = new Student[2];
+		Student [] std = new Student[2];//배열
 		
 		for(int i = 0 ; i <std.length ; i++) {
-			std[i] = new Student();
+			std[i] = new Student();//생성자
 			
 			System.out.println("name :"); std[i].name = scan.next();
 			System.out.println("kor :"); std[i].kor = scan.nextInt();

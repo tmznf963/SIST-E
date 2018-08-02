@@ -3,14 +3,14 @@ import java.util.Scanner;
 public class ArrayDemo6 {
 	public static void main(String[] args) {
 
-		Student[] std = new Student[2];
+		Student2[] std = new Student2[2];
 
-		std[0] = new Student();
+		std[0] = new Student2();
 		std[0].name = "한지민";
 		std[0].age = 34;
 		std[0].address = "서울시 서대문구";
 
-		std[1] = new Student();
+		std[1] = new Student2();
 		std[1].name = "이미자";
 		std[1].age = 65;
 		std[1].address = "부산직할시 해운대구";
