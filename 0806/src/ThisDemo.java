@@ -3,7 +3,7 @@
 // this() : ㅇ
 public class ThisDemo {
 	public static void main(String[] args) {
-		Product mouse = new Product();
+		Product mouse = new Product();//기본 생성자
 		mouse.setName("Logitech mouse");
 		mouse.setPrice(35_000);
 		Product other = mouse.refCopy();
