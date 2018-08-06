@@ -1,7 +1,7 @@
 
 public class ConstructorDemo2 {
 	public static void main(String[] args) {
-		MyCalender mc = new MyCalender();
+		MyCalender mc = new MyCalender();//기본생성자 호출
 		mc.dispaly();
 		String str = new String(); //String은 기본 생성자가 있다.
 	}
