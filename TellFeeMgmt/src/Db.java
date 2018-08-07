@@ -51,7 +51,7 @@ public class Db {
 		return time;
 	}
 	public void display() {
-		System.out.printf("%d %s %s %d %d %d %.2f %.2f \n",
+		System.out.printf("%d %s %s %d %d %d %f %f \n",
 				num,tel,name,time,def_tax,price,tax,sum);
 	}
 	
