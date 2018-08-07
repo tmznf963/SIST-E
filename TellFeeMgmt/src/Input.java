@@ -8,7 +8,8 @@ public class Input {
    private File file;
    private Db [] array;
    
-   public Input() {//생성자 [멤버변수 초기화]
+   public Input(Db [] d_arr) {//생성자 [멤버변수 초기화]
+	   this.array = d_arr;
 	   file = new File("./Input.txt");	   
 	   try {
 		   scan = new Scanner(file);
@@ -36,7 +37,8 @@ public class Input {
 		 * 01\d-\d{3,4}-\d{4}
 		 * */
 		
-   public void input(){//메소드
+   public int input(){//메소드
+	   int count = 0;
 	   while(this.scan.hasNextLine()) {//파일의 내용이 다음 라인이 있을 때 까지
 		   
 		   String line = this.scan.nextLine();
@@ -48,9 +50,11 @@ public class Input {
 		   int time = Integer.parseInt(array[3]);
 		   
 		   Db db = new Db(num,tel,name,time);
+		   this.array[count] = db;
 		   
-		   System.out.println(db.getTel());
+		   count++;//횟수 체크
 	   }
+	   return count;
 	}
 	
 }//class

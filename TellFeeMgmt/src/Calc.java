@@ -1,7 +1,12 @@
-
 public class Calc {
-	public void calc(Db[] array){
-		for(int i=0; i<array.length;i++) {
+	private Db [] array;
+	private int count;
+	public Calc(Db [] array, int count){//积己磊
+		this.array = array;
+		this.count = count;
+	}
+	public void calc(){//皋家靛
+		for(int i=0; i<this.count;i++) {
 			Db db =array[i]; //疙技辑 积己
 			
 		      if(db.getNum()==1) {
