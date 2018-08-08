@@ -9,7 +9,7 @@ public class OverrideDemo {// 부모메소드 = 자식메소드 같을 때 override
 		Parent parent = new Parent();
 		//parent.display();
 		Child child = new Child();
-		child.display();
+		child.print();
 	}
 }
 
@@ -20,6 +20,10 @@ class Parent {
 }
 
 class Child extends Parent {
+	public void print() {
+		this.display();
+		super.display();//지시대명사 == 접근제한자
+	}
 	@Override
 	public void display() {
 		System.out.println("자식 메소드");
