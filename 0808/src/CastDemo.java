@@ -10,14 +10,19 @@
  */
 public class CastDemo {
 	public static void main(String[] args) {
-		Test1 test = new Test1();
-		Temp temp = new Temp();
-		//자식 --> 부모 : 항상 성공
+		Test1 test = new Test1();//부모
+		Temp temp = new Temp();//자식
+		
+		//자식 --> 부모 : 자동,강제 항상 성공
 		test = (Test1)temp;//자식이 부모로 형변환 가능
 		
 		//부모 --> 자식 : 자동형변환 실패, 강제형변환 성공 == 컴파일 || 런타임 성공or실패
-		temp = (Temp)test;
-		System.out.println(temp);
+		if(test instanceof Temp) {
+			System.out.println("된다.");
+			temp = (Temp)test;//부모를 자식으로
+		}else {
+			System.out.println("안된다.");
+		}
 		
 	}
 }
