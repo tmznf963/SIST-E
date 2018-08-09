@@ -24,7 +24,7 @@ public class Input {
          String line = scan.nextLine();
          String [] data = line.split("\\s+");
          Product  p = new Product(data[0], Integer.parseInt(data[1]), Integer.parseInt(data[2]),
-               Integer.parseInt(data[3]),Integer.parseInt(data[4]));
+               Integer.parseInt(data[3]),Integer.parseInt(data[4]), count);
          this.data[count++] = p;
          }
       return count;

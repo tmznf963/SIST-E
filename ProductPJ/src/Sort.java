@@ -5,7 +5,7 @@ public class Sort {
       this.array = array;
       this.count = count;
    }
-   public void bubbleSort() {
+   public void bubbleSort() {//버블정렬
       for(int i = 0 ; i < this.count - 1 ; i++) {
          for(int j = 0 ; j < this.count - 1 ; j++) {
             if((this.array[j].getPer_cost())*100 < (this.array[j+1].getPer_cost())*100) {

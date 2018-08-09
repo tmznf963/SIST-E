@@ -10,8 +10,8 @@ public class Output {
       this.displayLabel();
       for(int i =0 ; i < this.count ; i++) {
          Product p = this.array[i];
-         System.out.printf("%s %d %d  %d  %d  %d  %.2f\n",
-               p.getName(), p.getSu(), p.getSell_price(), 
+         System.out.printf("%d\t %s %d %d  %d  %d  %d  %.2f\n",
+               p.getRanking(),p.getName(), p.getSu(), p.getSell_price(), 
                p.getBuy_price(), p.getFee(), p.getCost(), 
                p.getPer_cost());
       }

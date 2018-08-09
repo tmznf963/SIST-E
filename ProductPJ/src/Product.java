@@ -6,6 +6,7 @@ public class Product {
    int buy_price;
    int fee;
    int cost;
+   int ranking;
    double per_cost;
    
    
@@ -51,12 +52,19 @@ public class Product {
    public void setPer_cost(double per_cost) {
       this.per_cost = per_cost;
    }
-   public Product(String name, int su, int sell_price, int buy_price, int fee) {
+   public Product(String name, int su, int sell_price, int buy_price, int fee, int ranking) {
       
       this.name = name;
       this.su = su;
       this.sell_price = sell_price;
       this.buy_price = buy_price;
       this.fee = fee;
+      this.ranking = 1;
+   }
+   public void setRanking(int ranking) {
+	   this.ranking = ranking;
+   }
+   public int getRanking() {
+	   return ranking;
    }
 }

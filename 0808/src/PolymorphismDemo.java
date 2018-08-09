@@ -22,7 +22,7 @@ public class PolymorphismDemo {
 		return scan.nextInt();
 	}
 	static void display(int choice) {
-		Mammal m = new Mammal();
+		Mammal m = null;//new Mammal 못함 == 추상클래스
 		switch(choice) {								//다형성
 		case 1: m = new Dog(); break;
 		case 2: m= new Cat(); break;

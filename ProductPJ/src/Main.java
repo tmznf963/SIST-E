@@ -8,9 +8,11 @@ public class Main {
             Calc calc = new Calc(array,count);   
             calc.calc();
             
-            Sort  sort = new Sort(array,count);   
-            sort.bubbleSort();
-             
+//            Sort  sort = new Sort(array,count);   
+//            sort.bubbleSort();
+            Sort1  sort = new Sort1(array,count);   
+            sort.selectionSort(); 
+            
             Output output = new Output(array, count);   
             output.output();   
    }
