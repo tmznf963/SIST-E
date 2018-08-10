@@ -1,13 +1,15 @@
 import java.util.Date;
 
 public class DeprecationDemo {
+	int e = 20_000;
+	Date now = new Date();
 	public static void main(String[] args) {
 		
-		Date now = new Date();
+	/*	Date now = new Date();
 		System.out.println(now);
 
 		int year = now.getYear();//Deprecation = 오래되어서 사용 안하는 메소드.
 		System.out.println("year = "+year);//현재 2018 - 1900년
-		System.out.println("Month = "+now.getMonth());
+		System.out.println("Month = "+now.getMonth());*/
 	}
 }
