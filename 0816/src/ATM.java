@@ -11,9 +11,16 @@ public class ATM implements Runnable{
 	@Override
 	public void run() {
 		for(int i = 0 ; i <5 ; i++) {
-			synchronized(this) {//부분 lock
-				withdraw(1000);				
-			}
+			try {
+				Thread.sleep(1000);
+				synchronized(this) {//부분 lock == 동기화블럭
+					withdraw(1000);				
+					if(this.balance == 2000 || this.balance == 8000||
+							this.balance == 4000 || this.balance == 6000)
+						this.wait();//쉬고
+					else this.notify();//깨우고
+				}
+			}catch(Exception e) {}
 		}
 	}
 }
