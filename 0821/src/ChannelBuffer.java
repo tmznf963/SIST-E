@@ -24,7 +24,7 @@ public class ChannelBuffer {
 		FileChannel inCh = fis.getChannel();
 		FileChannel outCh = fos.getChannel();
 		MappedByteBuffer map = inCh.map(MapMode.READ_ONLY, 0, inCh.size());
-		
+		outCh.write(map);
 		//map.put(Charset.forName("utf-8").decode(outCh));
 		
 		System.out.println("Copy End...");
