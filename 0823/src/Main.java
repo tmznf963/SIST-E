@@ -10,6 +10,7 @@ public class Main {
 		
 		try {
 			input.input();//input클래스에 input메소드
+			System.out.println("DB연결 성공");
 		}catch(SQLException e) {
 			System.out.println(e);
 		}

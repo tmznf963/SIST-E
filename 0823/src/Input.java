@@ -7,42 +7,48 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
-public class Input {
+class Input {
 	private Vector<Student> vector;
 	private Scanner scan;
 	private Connection conn;
 	
-	public Input(Vector<Student> vector,Connection conn) {//생성자 //Main에서 보낸 vector 받기
+	public Input(Vector<Student> vector, Connection conn) {  //Constructor
 		this.vector = vector;
 		this.conn = conn;
-		File file = new File("./sungjuk.dat"); // ./현재위치 ../부모위치
+		File file = new File("./sungjuk.dat");
 		try {
-			this.scan = new Scanner(file); //scan이 file을 가지고 있다.
-		} catch (FileNotFoundException e) {//file 못찾으면
-			System.out.println("File Not Found");
-			System.exit(-1);//비정상 종료   // 0 == 정상종료
-		}
+			this.scan = new Scanner(file);
+		} catch (FileNotFoundException e) {
+			System.out.println("File Not Found");   
+			System.exit(-1);
+		}	
 	}
-	
 	public void input() throws SQLException {
-		
-		while(this.scan.hasNextLine()) {//파일의 다음 라인이 없을 때 까지
-			String line = this.scan.nextLine(); //file 정보 한줄읽기 --> scan
-			StringTokenizer st = new StringTokenizer(line);//() 안에는 파싱할 문자열
-			String [] array = new String[st.countTokens()];//Token 갯수 만큼 배열 생성
+		while(this.scan.hasNextLine()) {
+			String line = this.scan.nextLine();   //1101     한송이     78     87     83    78
+			StringTokenizer st = new StringTokenizer(line);
+			String [] array = new String[st.countTokens()];
 			int count = 0;
-			while(st.hasMoreTokens()) {//count < st.countTokens()
+			while(st.hasMoreTokens()) {
 				array[count++] = st.nextToken();
 			}
-			Student s = new Student(array[0],array[1],Integer.parseInt(array[2]),Integer.parseInt(array[3]),
-														Integer.parseInt(array[4]),Integer.parseInt(array[5]));
-			this.vector.addElement(s);//vector 값 추가 == addElement();
+			Student s = new Student(array[0], array[1], Integer.parseInt(array[2]),
+					           Integer.parseInt(array[3]), Integer.parseInt(array[4]),
+					           Integer.parseInt(array[5]));
+			this.vector.addElement(s);
 			
-			Statement stmt = this.conn.createStatement();
+			Statement stmt = this.conn.createStatement();//4.
 			String sql = "INSERT INTO Student(hakbun, irum, kor, eng, mat, edp)  ";
-			sql +="VALUES('"+s.getHakbun()+"', '"+s.getIrum()+"', "+s.getKor()+", ";
-			sql +=s.getKor()+", "+s.getEng()+", "+s.getMat()+", "+s.getEdp()+" )";
-			System.out.println(sql);
+			sql += "VALUES('" + s.getHakbun() + "', '" + s.getIrum() + "', ";
+			sql += s.getKor() + ", " + s.getEng() + ", " + s.getMat() + ",";
+			sql += s.getEdp() + ")";
+			//System.out.println(sql);
+			stmt.executeUpdate(sql);
 		}
 	}
 }
+
+
+
+
+
