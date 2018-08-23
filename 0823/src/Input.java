@@ -36,7 +36,6 @@ class Input {
 					           Integer.parseInt(array[3]), Integer.parseInt(array[4]),
 					           Integer.parseInt(array[5]));
 			this.vector.addElement(s);
-			
 			Statement stmt = this.conn.createStatement();//4.
 			String sql = "INSERT INTO Student(hakbun, irum, kor, eng, mat, edp)  ";
 			sql += "VALUES('" + s.getHakbun() + "', '" + s.getIrum() + "', ";
