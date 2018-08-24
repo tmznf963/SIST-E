@@ -5,7 +5,30 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SeongjeokDAO {
+public class SeongjeokDAO {//MVC∆–≈œ
+	public static void insert(StudentDTO std) throws SQLException{
+		Connection conn = DBConnection.getInstance();
+		Statement stmt = conn.createStatement();
+		String sql = "INSERT INTO Student "
+						  + "VALUES ('"+std.getHakbun()+"', '"+std.getName()+"',"
+						  		+ ""+std.getKor()+","+std.getEng()+","+std.getMat()+","+std.getEdp()+","+std.getSum()+","+std.getAvg()+", '"+std.getGrade()+"')";
+		//System.out.println(sql);
+		stmt.executeUpdate(sql);
+		System.out.println("Insert Success");
+		if(stmt != null) stmt.close();
+		DBClose.close(conn);
+	}
+	public static void delete() throws SQLException{
+		Connection conn = DBConnection.getInstance();
+		Statement stmt = conn.createStatement();
+		String sql = "DELETE FROM Student    ";
+						  //+ "WHERE  hakbun = '1101'";
+		stmt.executeUpdate(sql);
+		System.out.println("Delete Success");
+		
+		if(stmt != null) stmt.close();
+		DBClose.close(conn);
+	}
 	public static void update() throws SQLException{
 		Connection conn = DBConnection.getInstance();
 		Statement stmt = conn.createStatement();
