@@ -1,42 +1,44 @@
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
+import java.awt.BorderLayout;
 import java.util.Vector;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
-public class Output extends JPanel{
-	private Vector<Student> vector;
-	private PrintWriter pw;
+class Output extends JPanel{
+	private Vector<Student> vector; 
+	private JButton btnCalc, btnSort, btnSave;
+	private JScrollPane scroll;
+	private JTable table;
 	
-	public Output(Vector<Student> vector) { //생성자
+	public Output(Vector<Student> vector) {
 		this.vector = vector;
-		
-		File file = new File("C:/temp/result.dat");
-		try {
-			this.pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file))));			
-		}catch(FileNotFoundException e) {
-			System.out.println("File Not Found");
-		}
+		this.table = new JTable();
+		this.scroll = new JScrollPane(this.table);
+		this.output();//그리는 애
 	}
-	
-	public void output() {
-		this.displayLabel();
-		for(int i=0 ; i<this.vector.size() ; i++) {
-			Student s = this.vector.get(i);//elementAt(i);
-			this.pw.printf("%-6s%-6s%5d%5d%5d%5d%5d%7.2f%5c\n",
-					s.getHakbun(),s.getName(),s.getKor(),s.getEdp(),s.getMat(),s.getEdp(),s.getSum(),s.getAvg(),s.getGrade());
-			this.pw.println();
-			this.pw.flush();
-		}
+	public void refresh(Vector<Student> vector) {//새로 그리는 메소드 vector == 입력받은 학생의 데이터
+		this.vector = vector;
+		output();
 	}
-	private void displayLabel() {
-		this.pw.println("                           <<쌍용 성적관리 프로그램>>");
-		this.pw.println("================================================");
-		this.pw.println("학번         이름          국어       영어       수학       전산      총점        평균             평점");
-		this.pw.println("================================================");
+	private void output() {//그리는 애
+		this.setLayout(new BorderLayout());
+		this.table.setModel(new MyModel(this.vector));//그림을 그릴 때.
+		this.add("Center", this.scroll);
+		this.add("North", getNorth());
+	}
+	private JPanel getNorth() {
+		JPanel panel = new JPanel();
+		panel.add(this.btnCalc = new JButton("계산하기"));
+		this.btnCalc.addActionListener(new MyAction(this.vector, this));//계산벡터, 아웃풋주소
+		panel.add(this.btnSort = new JButton("정렬하기"));
+		this.btnSort.addActionListener(new MyAction(this.vector, this));
+		panel.add(this.btnSave = new JButton("저장하기"));
+		this.btnSave.addActionListener(new MyAction(this.vector, this));
+		return panel;
 	}
 }
+
+
+

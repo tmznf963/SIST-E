@@ -30,8 +30,9 @@ public class Main {
 			}
 		});
 		this.con.add(this.tab);
-		this.tab.add("입력", new Input(this.vector, this.tab)); //tab
-		this.tab.add("출력", new Output(this.vector)); //tab
+		Output output = new Output(this.vector);
+		this.tab.add("입력", new Input(this.vector, this.tab, output)); //tab
+		this.tab.add("출력", output); //tab
 		this.frm.setSize(800,600);
 		this.frm.setVisible(true);
 	}

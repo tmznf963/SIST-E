@@ -21,10 +21,12 @@ public class Input extends JPanel implements ActionListener{
 	private JButton btnAdd;
 	private Font font;
 	private JTabbedPane tab;
+	private Output output;
 	
-	public Input(Vector<Student> vector, JTabbedPane tab) {//생성자 //Main에서 보낸 vector 받기
+	public Input(Vector<Student> vector, JTabbedPane tab, Output output) {//생성자 //Main에서 보낸 vector 받기
 		this.vector = vector;
 		this.tab = tab;
+		this.output = output;//output패널의 주소
 		this.p = new JPanel();
 		this.font = new Font("Sans Serif",Font.PLAIN,35);
 		this.display();
@@ -106,6 +108,8 @@ public class Input extends JPanel implements ActionListener{
 			this.tfEdp.setText("");
 		}else if(choice == JOptionPane.NO_OPTION) {
 			this.tab.setSelectedIndex(1);//0부터 시작 , 1 == 출력Tab
+			this.output.refresh(this.vector);// output에 있는 refresh 메소드
+			//System.out.println(this.vector.size());
 		}
 	}
 	
