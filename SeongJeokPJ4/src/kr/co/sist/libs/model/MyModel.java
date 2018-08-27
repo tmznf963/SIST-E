@@ -20,9 +20,9 @@ public class MyModel extends DefaultTableModel {
 		
 		if(vector == null) {
 			dataVector = null;
-		}else {/*
-			for(int i = 0 ; i < this.vector.size() ; i++) {
-				StudentVO s = this.vector.get(i);
+		}else {
+			for(int i = 0 ; i < vector.size() ; i++) {
+				StudentVO s = vector.get(i);
 				Vector<String> rowVector = new Vector<String>(1,1); //1층 쌓을 벡터
 				rowVector.addElement(s.getHakbun());
 				rowVector.addElement(s.getName());
@@ -32,10 +32,10 @@ public class MyModel extends DefaultTableModel {
 				rowVector.addElement(String.valueOf(s.getEdp()));
 				rowVector.addElement(String.valueOf(s.getSum()));
 				rowVector.addElement(String.valueOf(s.getAvg()));
-				rowVector.addElement(String.valueOf(s.getGrade()));//(열 벡터)
-				dataVector.addElement(rowVector);//완성된 1줄을 Vector에 넣는다.(행 벡터)
+				rowVector.addElement(String.valueOf(s.getGrade()));//(행 벡터)
+				dataVector.addElement(rowVector);//완성된 1줄을 Vector에 넣는다.(열 벡터 추가)
 			}			
-		*/}
+		}
 		return dataVector;
 	}
 }

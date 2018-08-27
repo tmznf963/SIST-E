@@ -1,5 +1,7 @@
 package kr.co.sist.libs.view;
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -7,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import kr.co.sist.libs.control.SelectControl;
 import kr.co.sist.libs.model.MyModel;
 import kr.co.sist.libs.model.StudentVO;
 
@@ -32,8 +35,6 @@ public class Output extends JPanel{
 	}
 	private JPanel getNorth() {
 		JPanel panel = new JPanel();
-		panel.add(this.btnSort = new JButton("정렬하기"));
-		//this.btnSort.addActionListener(new MyAction(this.vector, this));
 		panel.add(this.btnSave = new JButton("저장하기"));
 		//this.btnSave.addActionListener(new MyAction(this.vector, this));
 		return panel;

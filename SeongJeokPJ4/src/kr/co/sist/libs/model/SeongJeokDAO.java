@@ -15,8 +15,8 @@ public class SeongJeokDAO {
 				+ " VALUES ('"+s.getHakbun()+"','"+s.getName()+"',"+s.getKor()+","+s.getEng()+","+s.getMat()+","+s.getEdp()+","+s.getSum()+","+s.getAvg()+
 				",'"+s.getGrade()+"') ";
 		
-		System.out.println(sql);
-		//int row = stmt.executeUpdate(sql);//insert == Update //DB삽입
+		//System.out.println(sql);
+		int row = stmt.executeUpdate(sql);//insert == Update //DB삽입
 		if(stmt != null) stmt.close();
 		DBClose.close(conn);//닫아
 		return 1;
@@ -27,7 +27,7 @@ public class SeongJeokDAO {
 	public static Vector <StudentVO> selectAll() throws SQLException{//모든 학생
 		Connection conn = DBConnection.getConnection();//열어
 		Statement stmt = conn.createStatement();
-		String sql = " SELECT * FROM Student";
+		String sql = " SELECT * FROM Student ORDER BY sum DESC, hakbun ASC";//DESC내림차순     ASC오름차순
 		ResultSet rs = stmt.executeQuery(sql);
 		Vector<StudentVO> vector = new Vector<StudentVO>(1,1);
 		if(!rs.next()) {//학생이 없다면.
