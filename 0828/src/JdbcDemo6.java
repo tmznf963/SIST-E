@@ -15,6 +15,7 @@ public class JdbcDemo6 {
 		while(rs.previous()) {//거꿀로 올라감
 			System.out.println(rs.getString("hakbun"));			
 		}*/
+		/*
 		rs.first();//처음 칸으로 이동
 		System.out.println(rs.getString("hakbun"));
 		rs.last();//마지막 칸
@@ -22,7 +23,10 @@ public class JdbcDemo6 {
 		rs.absolute(3); //3번째 학 생
 		System.out.println(rs.getString("hakbun"));
 		rs.relative(-1);//현재 커서 -1번째
+		System.out.println(rs.getString("hakbun"));*/
+		rs.first();
 		System.out.println(rs.getString("hakbun"));
+		rs.deleteRow();
 		
 		DBClose.close(conn);
 	}
