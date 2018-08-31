@@ -61,3 +61,9 @@ where hiredate >= '1981-01-01' AND hiredate <= '1981-12-31';
 SELECT empno, ename
 FROM emp
 WHERE ename LIKE '%$_TEST' ESCAPE '$';
+
+
+SELECT ename AS "ÀÌ¸§", job
+FROM emp
+--WHERE job = 'CLERK' OR job = 'MANAGER' OR job = 'ANALYST';
+WHERE job IN('CLERK', 'MANAGER', 'ANALYST');
