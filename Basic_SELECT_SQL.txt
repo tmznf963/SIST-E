@@ -1,0 +1,63 @@
+select empno,ename , job , hiredate
+from emp
+where hiredate LIKE '1981%';
+
+
+select empno,ename , job , hiredate
+from emp
+where hiredate BETWEEN '1981-01-01' AND '1981-12-31';
+
+
+select empno,ename , job , hiredate
+from emp
+where hiredate >= '1981-01-01' AND hiredate <= '1981-12-31';
+
+
+select NVL(mgr, 'No Manager')
+from emp;
+
+select empno 사번 from emp; --별칭
+
+select empno from emp;
+
+select empno AS "사원번호", ename AS "사원이름" , sal *12 + NVL(comm,0) AS "연봉" from emp;
+
+select 'Hello ' || ename || ' World' FROM emp;
+
+select ename || '  ' || sal from emp;
+
+select DISTINCT deptno, job from emp; -- DISTINCT 중복제거
+select DISTINCT deptno from emp;
+
+select * from NLS_SESSION_PARAMETERS;
+select hiredate from emp;
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD'; --포맷변경
+select hiredate from emp; -- 2018-08-31
+
+select ename from emp where hiredate >= '1987-01-01';
+
+select * from emp where comm IS NOT NULL;
+
+
+select * from emp;
+
+select ename, job, sal
+from emp
+--where sal >= 1300 AND sal<=1500;
+where sal BETWEEN 1300 AND 1500;
+
+select empno,ename , job , hiredate
+from emp
+where hiredate BETWEEN '1981-01-01' AND '1981-12-31';
+
+select empno,ename , job , hiredate
+from emp
+where hiredate LIKE '1981%';
+
+select empno,ename , job , hiredate
+from emp
+where hiredate >= '1981-01-01' AND hiredate <= '1981-12-31';
+
+SELECT empno, ename
+FROM emp
+WHERE ename LIKE '%$_TEST' ESCAPE '$';
