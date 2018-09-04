@@ -110,3 +110,12 @@ TO_CHAR(hiredate, 'YYYY "년" MM "월" DD "일" ') AS
 t_hiredate
 FROM emp
 WHERE deptno = 10;
+
+select deptno, AVG(sal)
+from emp
+group by deptno; --부서별 그룹 짖기
+
+select deptno, job ,AVG(sal)
+from emp
+GROUP BY deptno, job
+ORDER BY deptno ASC;
