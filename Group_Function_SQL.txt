@@ -1,0 +1,39 @@
+select empno, ename, hiredate
+from emp
+--where hiredate >= '87/01/01' AND hiredate <='87/12/31'
+--where hiredate BETWEEN '87/01/01' AND '87/12/31';
+--where hiredate LIKE '87%';
+--where SUBSTR(hiredate, 1,2) = '87';
+where TO_CHAR(hiredate,'YYYY') = '1987';
+
+SELECT COUNT(DISTINCT job)
+FROM emp; -- DISTINCT 중복처리
+
+SELECT COUNT(job)
+FROM emp;
+
+SELECT COUNT(comm)
+FROM emp;--null값은 카운트 하지 않음
+
+SELECT job, MAX(sal), MIN(sal),AVG(sal)
+FROM emp
+--WHERE job LIKE 'SALE%';
+GROUP BY job; --기준
+
+SELECT TO_CHAR(hiredate,'YYYY') AS "입사년도", AVG(sal) AS "평균월급" , COUNT(sal) AS "입사동기"
+FROM emp
+GROUP BY TO_CHAR(hiredate,'YYYY')
+ORDER BY "입사년도" DESC;
+
+SELECT deptno, COUNT(ename)
+FROM emp
+GROUP BY deptno
+HAVING COUNT(ename) >= 5; -- where절에는 복수행함수 conut를 못 넣는다. 따라서 HAVING 사용. 그룹조건 == HAVING
+
+
+SELECT job, SUM(sal)
+FROM emp
+WHERE job NOT LIKE 'SALE%'
+GROUP BY job
+HAVING SUM(sal) > 5000
+ORDER BY SUM(sal) DESC;
