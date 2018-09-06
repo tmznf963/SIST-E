@@ -68,3 +68,166 @@ CREATE TABLE zipcode (
 );
 
 SELECT * FROM zipcode;
+
+DROP TABLE employee;
+DROP TABLE EMP_COPY;
+DROP TABLE test;
+
+CREATE TABLE emp_copy
+AS
+SELECT * FROM emp;	--CTAS 테이블 복사.
+
+SELECT * FROM emp_copy;
+
+DROP TABLE emp_copy;
+
+DESC zipcode;
+
+CREATE TABLE emp_copy
+AS
+SELECT * FROM emp
+WHERE job LIKE 'SAL%';
+
+CREATE TABLE EMP_COPY
+AS
+SELECT * FROM emp
+WHERE TO_CHAR(hiredate, 'YYYY') = '1987';
+
+SELECT * FROM emp_copy;
+DROP TABLE emp_copy;
+SELECT * FROM emp;
+
+CREATE TABLE EMP_COPY(column1, column2, column3)
+AS
+SELECT empno, ename, sal
+FROM EMP
+WHERE TO_CHAR(hiredate,'YYYY') = '1987';
+
+CREATE TABLE emp_copy
+AS
+SELECT *
+FROM emp
+WHERE 0 = 1;
+
+SELECT table_name 
+FROM user_tables 
+WHERE table_name = UPPER('emp_copy'); --내가 만든 테이블 조회 (대문자)
+
+CREATE TABLE emp_calc(deptno, t_cnt, t_avg , t_sum, t_min, t_max)
+AS
+SELECT deptno, COUNT(*), TRUNC(AVG(sal),1), SUM(sal), MIN(sal), MAX(sal)
+FROM emp
+GROUP BY deptno; --부서별로 그룹.
+
+SELECT * FROM emp_calc;
+
+
+CREATE TABLE department(
+id  NUMBER(7),
+name VARCHAR2(25)
+);
+DESC department;
+
+SELECT table_name
+FROM user_tables
+WHERE table_name = UPPER('department');
+
+CREATE TABLE student(
+hakbun CHAR(4),
+irum	VARCHAR(20),
+age		NUMBER(3)
+);
+
+DESC student;
+
+INSERT INTO student
+VALUES('1111','한지민',24);
+INSERT INTO student
+VALUES('1112','한지혜',34);
+
+ALTER TABLE student
+ADD (tel CHAR(13));
+
+ALTER TABLE student
+ADD (address VARCHAR2(100));
+
+ALTER TABLE student
+DROP COLUMN hakbun;
+
+DESC student;
+
+SELECT * FROM student;
+
+INSERT INTO student(tel)
+VALUES ('010-3333-2222');
+
+DELETE FROM student
+WHERE tel ='010-3333-2222';
+
+ALTER TABLE student
+RENAME COLUMN hakbun TO code;
+
+SELECT table_name
+FROM user_tables
+WHERE table_name = UPPER('student');
+
+DROP TABLE student;
+
+CREATE TABLE student(
+hakbun CHAR(4),
+irum	VARCHAR(20),
+age		NUMBER(3)
+);
+
+INSERT INTO student
+VALUES('1111','한지민',24);
+INSERT INTO student
+VALUES('1112','한지혜',34);
+INSERT INTO student
+VALUES('1113','바이트가20넘는이름을넣을수있다',34);
+
+ALTER TABLE student
+MODIFY (irum VARCHAR2(50));
+
+SELECT * FROM zipcode;
+
+TRUNCATE TABLE zipcode;
+DESC zipcode;
+
+COMMENT ON TABLE emp IS '사원테이블정보';
+
+COMMENT ON TABLE dept IS '부서테이블정보';
+
+DESC user_tab_comments;
+
+SELECT table_name, table_type, comments
+FROM USER_TAB_COMMENTS
+WHERE table_name = UPPER('emp');
+
+
+DESC employee;
+
+COMMENT ON TABLE emp IS '사원테이블정보';
+
+COMMENT ON TABLE dept IS '부서테이블정보';
+
+DESC user_tab_comments;
+DESC dept;
+
+SELECT table_name, table_type, comments
+FROM USER_TAB_COMMENTS
+WHERE table_name = UPPER('emp');
+
+COMMENT ON COLUMN dept.dname IS '부서의 이름 컬럼';
+COMMENT ON COLUMN dept.loc IS '부서의 지역 컬럼';
+DESC dept;
+
+SELECT table_name, column_name,comments
+FROM USER_COL_COMMENTS
+WHERE table_name = UPPER('dept');
+
+RENAME emp_calc TO calctable;
+DESC calctable;
+
+SELECT table_name
+FROM user_tables;
