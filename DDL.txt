@@ -1,0 +1,70 @@
+UPDATE EMP
+SET hiredate = SYSDATE
+WHERE deptno = 10;
+
+SELECT * FROM emp;
+
+UPDATE emp
+SET deptno = 40  --바꿀 값
+WHERE TO_CHAR(hiredate,'YYYY') = '1987'; --바꿀 조건
+
+
+ROLLBACK; --원위치
+
+UPDATE emp
+SET sal = sal * 1.2
+WHERE job LIKE 'SAL%';
+
+SELECT * FROM emp;
+
+UPDATE emp
+SET deptno = 60
+WHERE TO_CHAR(hiredate,'YYYY') = '1987'; --부서번호 60이 없으므로 참조무결성 위배.
+
+UPDATE EMP
+SET (job,sal) = (SELECT job,sal FROM emp WHERE ename ='SCOTT')
+WHERE empno = 7900;
+
+
+DELETE FROM EMP
+--WHERE ename LIKE 'A%'; --A로 시작하는 사원이름 다 지워.
+WHERE SUBSTR(hiredate,8,2) = '87'; --'DD-MON-RR' 87년 입사한 사람 다 지워.
+
+SELECT * FROM emp;
+SELECT VALUE FROM NLS_SESSION_PARAMETERS WHERE parameter ='NLS_DATE_FORMAT';
+
+DELETE FROM DEPT
+WHERE deptno = 10; --참조무결성 위반.
+
+SELECT table_name
+FROM user_tables
+WHERE table_name = 'EMP'; --대문자 조회
+
+
+CREATE TABLE emp_copy
+(
+	empno		CHAR(4),
+  ename		VARCHAR(20),
+  sal			NUMBER(7),
+  hiredate	DATE
+);
+
+SELECT table_name
+FROM USER_TABLES
+WHERE table_name ='EMP_COPY'; --UPPER('emp_copy')
+
+DESC emp_copy;
+
+SELECT parameter,VALUE
+FROM NLS_SESSION_PARAMETERS;
+
+CREATE TABLE zipcode (
+	SEQ 	NUMBER(5) PRIMARY KEY,
+	ZIPCODE	VARCHAR2(7),
+	SIDO	VARCHAR2(100),
+	GUGUN 	VARCHAR2(200),
+	DONG	VARCHAR2(500),
+	BUNJI 	VARCHAR2(500)
+);
+
+SELECT * FROM zipcode;
