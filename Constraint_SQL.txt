@@ -1,0 +1,112 @@
+CREATE TABLE emp_copy
+AS
+SELECT *
+FROM emp;
+
+CREATE TABLE dept_copy
+AS
+SELECT *
+FROM dept;
+
+ALTER TABLE dept_copy
+ADD CONSTRAINT;
+
+
+DESC user_constraints;
+
+SELECT constraint_type, table_name
+FROM user_constraints
+WHERE table_name = UPPER('zipcode');
+
+DESC zipcode;
+
+CREATE TABLE student
+(
+	hakbun	CHAR(4) CONSTRAINT student_hakbun_pk PRIMARY KEY,
+  irum	VARCHAR2(20)  DEFAULT 'No Name',
+  age	NUMBER(3),
+  zipcode_id	NUMBER(5),
+  CONSTRAINT student_zipcode_id_fk FOREIGN KEY(zipcode_id)
+  REFERENCES zipcode(seq)
+);
+
+SELECT * FROM student;
+
+SELECT table_name
+FROM USER_TABLES
+WHERE table_name = UPPER('student');
+
+SELECT table_name ,constraint_name , constraint_type
+FROM user_constraints
+WHERE table_name = UPPER('student');
+
+DESC user_cons_columns; --제약조건의 이름, 컬럼 이름 알고 싶을 떄
+
+SELECT table_name, constraint_name, column_name
+FROM user_cons_columns
+WHERE table_name = UPPER('student');
+
+INSERT INTO student
+VALUES ('1111', '한지민',22, 49000);
+
+INSERT INTO student
+VALUES ('1112','한채영',34,59000); -- 49835개 이상 들어가면 ERROR 
+
+CREATE TABLE member
+(
+	id	VARCHAR2(14),
+  pwd	VARCHAR2(12),
+  irum	VARCHAR2(20),
+  CONSTRAINT member_id_pk PRIMARY KEY(id)
+);
+
+CREATE TABLE product
+(
+	p_id  CHAR(4),
+  p_name VARCHAR2(50),
+  CONSTRAINT product_p_id_pk PRIMARY KEY(p_id) 
+);
+
+SELECT table_name , constraint_name , constraint_type
+FROM user_constraints
+WHERE table_name = UPPER('member');
+
+CREATE TABLE t_order
+(
+	order_id	VARCHAR2(9),
+  m_id	VARCHAR2(14),
+  p_id	CHAR(4),
+	order_date	DATE,
+	CONSTRAINT order_order_id_pk PRIMARY KEY(order_id),
+  CONSTRAINT order_m_id_fk FOREIGN KEY(m_id)
+  REFERENCES member(id),
+  CONSTRAINT order_p_id_fk FOREIGN KEY(p_id)
+  REFERENCES product(p_id)
+);
+
+SELECT * FROM t_order;
+
+SELECT table_name, constraint_name , constraint_type
+FROM user_constraints
+WHERE table_name = UPPER('t_order');
+
+SELECT table_name , constraint_name, column_name
+FROM user_cons_columns
+WHERE table_name = UPPER('t_order');
+
+INSERT INTO member(id)
+VALUES('aaaa');
+
+INSERT INTO member(id)
+VALUES('bbbb');
+
+INSERT INTO product(p_id)
+VALUES('1111');
+INSERT INTO product(p_id)
+VALUES('2222');
+
+INSERT INTO t_order
+VALUES('180907001','aaaa','1111',SYSDATE);
+
+SELECT *
+FROM t_order;
