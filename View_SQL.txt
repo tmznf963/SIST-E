@@ -1,0 +1,42 @@
+DESC user_views; --구조를 먼저 찾아보고
+
+SELECT view_name, text
+FROM user_views
+WHERE view_name = UPPER('emp_vu'); --무엇을 보여주는 뷰인지 text를 보고 판단
+
+SELECT * FROM emp_vu;
+
+CREATE VIEW test_vu
+AS
+SELECT * FROM test;  --test라는 테이블이 없어서 만들 수 없음 
+
+CREATE FORCE VIEW test_vu  --force를 써서 강제로 뷰를 만듦. 
+AS
+SELECT * FROM test; 
+
+CREATE VIEW emp10_vu("사원번호", "사원이름", "봉급")
+AS
+SELECT empno, ename, sal
+FROM emp
+WHERE deptno = 10;
+
+SELECT * FROM emp10_vu;
+
+DESC emp10_vu;
+
+CREATE OR REPLACE VIEW groupbyjob_vu("직무", "최소월급", "최대월급", "평균월급", "월급합계") -- OR REPLACE 언제든지 수정이 가능
+AS
+SELECT job, MIN(sal), MAX(sal), FLOOR(AVG(sal)), SUM(sal)
+FROM emp
+GROUP BY job
+HAVING AVG(sal) >= 2000;
+
+SELECT * FROM groupbyjob_vu;
+
+CREATE OR REPLACE VIEW emp40
+AS
+SELECT * FROM emp
+WHERE deptno = 40;  --아무도 없는 상태
+
+INSERT INTO emp40(empno, ename, deptno) --뷰에 인서트함. -> 테이블에 인서트됨(권한이 read only가 아닌 경우.) = 단순 뷰
+VALUES (8888, '한지민', 40);
