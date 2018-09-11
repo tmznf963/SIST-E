@@ -1,0 +1,114 @@
+SET SERVEROUTPUT ON
+ACCEPT p_deptno  PROMPT '부서번호: ';
+ACCEPT p_dname	 PROMPT '부서이름: ';
+ACCEPT p_loc  	 PROMPT '부서위치: ';
+DECLARE
+v_deptno   NUMBER(2)    :=&P_deptno;
+v_dname		 VARCHAR2(14) :=UPPER('&p_dname');
+v_loc			 VARCHAR2(13) :=UPPER('&p_loc');
+BEGIN
+	INSERT INTO dept_copy
+	VALUES(v_deptno,v_dname,v_loc);
+  COMMIT;
+	DBMS_OUTPUT.PUT_LINE('Insert Success');
+END;
+
+ACCEPT  p_empno  PROMPT '사번 :';
+ACCEPT  p_job    PROMPT '직무 :';
+DECLARE
+    v_job       VARCHAR2(20) := UPPER('&p_job');
+    v_empno     NUMBER(4)    := &p_empno;
+BEGIN
+    update emp
+    set job = v_job
+    where empno = v_empno;
+    COMMIT;
+    DBMS_OUTPUT.PUT_LINE('Update Success');
+END;
+
+
+SET SERVEROUTPUT ON
+ACCEPT p_empno PROMPT '사원번호: ';
+DECLARE
+ v_empno    NUMBER(4)   :=&p_empno;
+ v_ename    VARCHAR2(20);
+ v_sal	    NUMBER(7,2);
+ v_hiredate DATE;
+BEGIN
+ SELECT ename, sal, hiredate
+ INTO v_ename, v_sal, v_hiredate
+ FROM emp
+ WHERE empno = v_empno;
+ DBMS_OUTPUT.PUT_LINE('사번'||' '||'사원이름'||' '||'봉급'||' '||'입사날짜');
+ DBMS_OUTPUT.PUT_LINE('---------------------------------------------');
+  DBMS_OUTPUT.PUT_LINE(v_empno||' '||v_ename||' '||v_sal||' '||v_hiredate);
+END;
+
+
+
+CREATE TABLE Student
+(
+ hakbun     CHAR(4),
+ irum       VARCHAR2(20)   NOT NULL,
+ kor        NUMBER(3)     DEFAULT 0 NOT NULL,
+ eng        NUMBER(3)     DEFAULT 0 NOT NULL,
+ mat        NUMBER(3)     DEFAULT 0 NOT NULL,
+ edp        NUMBER(3)     DEFAULT 0 NOT NULL,
+ sum        NUMBER(3),
+ avg        NUMBER(5,2),
+ grade      CHAR(1),
+ CONSTRAINT student_hakbun_pk PRIMARY KEY(hakbun),
+ CONSTRAINT student_irum_uk UNIQUE(irum),
+ CONSTRAINT student_kor_ck CHECK(kor BETWEEN 0 AND 100)
+);
+
+select * from student;
+
+
+ACCEPT p_hak  PROMPT  '학번 : ';
+ACCEPT p_i  PROMPT  '이름 : ';
+ACCEPT p_k  PROMPT  '국어 : ';
+ACCEPT p_e  PROMPT  '영어 : ';
+ACCEPT p_m  PROMPT  '수학 : ';
+ACCEPT p_ed  PROMPT  '전산 : ';
+DECLARE
+ v_hak  CHAR(4) :='&p_hak';
+ v_i    VARCHAR2(20):='&p_i';
+ v_k    NUMBER(3) :=&p_k;
+ v_e    NUMBER(3) :=&p_e;
+ v_m    NUMBER(3) :=&p_m;
+ v_ed   NUMBER(3) :=&p_ed;
+ v_sum  NUMBER(3) DEFAULT 0;
+ v_avg  NUMBER(5,2) DEFAULT 0;
+ v_grade CHAR(1) NOT NULL :='F';
+BEGIN
+ v_sum := v_k + v_e + v_m + v_ed;
+ v_avg := ROUND(v_sum/4,2);
+ IF v_avg >= 90 AND v_avg <= 100 THEN v_grade := 'A';
+ ELSIF v_avg >= 80 AND v_avg < 90 THEN v_grade := 'B';
+ ELSIF v_avg >= 70 AND v_avg < 80 THEN v_grade := 'C';
+ ELSIF v_avg >= 60 AND v_avg < 70 THEN v_grade := 'D';
+ ELSE v_grade:='F';
+ END IF;
+ INSERT INTO student
+ VALUES(v_hak,v_i,v_k,v_e,v_m,v_ed,v_sum,v_avg,v_grade);
+ DBMS_OUTPUT.PUT_LINE('-----------SUCCESS-----------');
+END;
+
+
+ACCEPT p_deptno PROMPT '부서번호 : ';
+ACCEPT p_dname PROMPT '부서이름 : ';
+ACCEPT p_loc PROMPT '부서위치 : ';
+DECLARE
+v_deptno dept.deptno%TYPE :=&p_deptno;
+v_dname dept.dname%TYPE  :=UPPER('&p_dname');
+v_loc   dept.loc%TYPE   :=UPPER('&p_loc');
+BEGIN
+INSERT INTO dept
+VALUES(v_deptno,v_dname,v_loc);
+COMMIT;
+DBMS_OUTPUT.PUT_LINE('새로운 데이터 삽입 성공');
+END;
+
+
+
