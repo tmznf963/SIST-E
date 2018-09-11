@@ -21,6 +21,8 @@ CREATE TABLE nighttable
    nightbonus  INT    NOT NULL
 );
 
+ALTER TABLE nighttable convert to charset utf8;
+
 INSERT INTO nighttable VALUES(1, 15000);
 INSERT INTO nighttable VALUES(2, 30000);
 INSERT INTO nighttable VALUES(3, 45000);
@@ -31,7 +33,7 @@ CREATE TABLE department
 (
    dcode   CHAR(1) PRIMARY KEY,
    dname  VARCHAR(20)   NOT NULL
-);
+)ENGINE = InnoDB;
 
 ALTER TABLE department convert to charset utf8;
 
@@ -45,22 +47,51 @@ INSERT INTO department VALUES('F', '생산부');
 CREATE TABLE employee
 (
    empno       VARCHAR(20)  PRIMARY KEY,
-   pwd			VARCHAR(20)	 NOT NULL,
+   pwd         VARCHAR(20)    NOT NULL,
    name        VARCHAR(20)  NOT NULL,
-   r_num			VARCHAR(13)  NOT NULL,
+   age         INT          NOT NULL,
+   birthdate   VARCHAR(20)  NOT NULL,
    sex         VARCHAR(20)  NOT NULL,
-   email       VARCHAR(20)  NOT NULL,
-   hiredate		VARCHAR(20)  NOT NULL,
-   birthdate	VARCHAR(20)	 NOT NULL,
-   p_num			VARCHAR(20)	 NOT NULL,
-   sum          INT      NOT NULL,
+   email       VARCHAR(50)  NOT NULL,
+   hiredate      VARCHAR(20)  NOT NULL,
+   p_num         VARCHAR(20)    NOT NULL,
+   sum          INT      ,
    salary       INT      NOT NULL,
    address      VARCHAR(255) NOT NULL,
-   dcode 		CHAR(1) NOT NULL,
-   CONSTRAINT `employee_dcode_fk`
-		FOREIGN KEY (dcode) REFERENCES department (dcode)
-		ON DELETE CASCADE
-		ON UPDATE RESTRICT
-)
+   dcode       CHAR(1) NOT NULL,
+   nighttime   TINYINT NOT NULL,
+   position   VARCHAR(20) NOT NULL
+)ENGINE = InnoDB;
 
 ALTER TABLE employee convert to charset utf8;
+      
+alter table employee add constraint employee_dcode_fk foreign key (dcode) references department (dcode);
+alter table employee add constraint employee_nighttime_fk foreign key (nighttime) references nighttable (nighttime);
+alter table employee add constraint employee_position_fk foreign key (position) references gibontable (position);
+
+
+INSERT INTO employee(empno,pwd,name,age,birthdate,sex,email,hiredate,p_num,salary,address,dcode,nighttime,position)
+VALUES('A001','aaa111','김민호',25,'940806','남','qhfhd963@naver.com','13/03/02','01038476319',2600,'경기도양주시덕계동','A',5,'사원');
+INSERT INTO employee(empno,pwd,name,age,birthdate,sex,email,hiredate,p_num,salary,address,dcode,nighttime,position)
+VALUES('B001','bbb111','김수연',25,'940806','여','tndus123@naver.com','13/04/02','01033558899',2500,'서울특별시노원구월계동','B',1,'차장');
+INSERT INTO employee(empno,pwd,name,age,birthdate,sex,email,hiredate,p_num,salary,address,dcode,nighttime,position)
+VALUES('C001','ccc111','김상민',26,'930801','남','tkdals963@naver.com','13/03/02','01044772219',2500,'서울특별시도봉구쌍문동','C',3,'대리');
+INSERT INTO employee(empno,pwd,name,age,birthdate,sex,email,hiredate,p_num,salary,address,dcode,nighttime,position)
+VALUES('D001','ddd111','정주희',26,'930801','여','wngml123@naver.com','13/04/02','01055753389',2700,'서울특별시마포구상수동','D',2,'과장');
+INSERT INTO employee(empno,pwd,name,age,birthdate,sex,email,hiredate,p_num,salary,address,dcode,nighttime,position)
+VALUES('E001','eee111','심우철',32,'870806','남','dncjf963@naver.com','13/01/02','01075879163',3300,'서울특별시성북구동선동','E',1,'이사');
+INSERT INTO employee(empno,pwd,name,age,birthdate,sex,email,hiredate,p_num,salary,address,dcode,nighttime,position)
+VALUES('F001','fff111','복종순',44,'750806','남','whdtns963@naver.com','13/01/02','01091575927',2500,'경기도의정부시신곡동','F',1,'사장');
+
+INSERT INTO employee(empno,pwd,name,age,birthdate,sex,email,hiredate,p_num,salary,address,dcode,nighttime,position)
+VALUES('A002','aaa222','한지민',26,'931206','여','wlals123@naver.com','13/02/02','01044476672',2600,'서울특별시성북구동선','A',3,'주임');
+INSERT INTO employee(empno,pwd,name,age,birthdate,sex,email,hiredate,p_num,salary,address,dcode,nighttime,position)
+VALUES('B002','bbb222','한효주',27,'921008','여','gywn123@naver.com','13/02/02','01038579946',2500,'서울특별시도봉구쌍문동','B',2,'대리');
+INSERT INTO employee(empno,pwd,name,age,birthdate,sex,email,hiredate,p_num,salary,address,dcode,nighttime,position)
+VALUES('C002','ccc222','한채영',28,'910901','여','codud123@naver.com','13/02/02','01044544796',2500,'서울특별시노원구월계동','C',1,'부장');
+INSERT INTO employee(empno,pwd,name,age,birthdate,sex,email,hiredate,p_num,salary,address,dcode,nighttime,position)
+VALUES('D002','ddd222','한석규',29,'900501','남','tjrrb963@naver.com','13/02/02','01033559017',2700,'경기도의정부시가능','D',4,'주임');
+INSERT INTO employee(empno,pwd,name,age,birthdate,sex,email,hiredate,p_num,salary,address,dcode,nighttime,position)
+VALUES('E002','eee222','한석필',30,'890406','남','tjrvlf963@naver.com','13/02/02','01075879185',3300,'경기도양주시덕정동','E',3,'대리');
+INSERT INTO employee(empno,pwd,name,age,birthdate,sex,email,hiredate,p_num,salary,address,dcode,nighttime,position)
+VALUES('F002','fff222','한민국',31,'880306','남','alsrnr963@naver.com','13/02/02','010134751348',2500,'서울특별시마포구상수동','F',3,'부장');
