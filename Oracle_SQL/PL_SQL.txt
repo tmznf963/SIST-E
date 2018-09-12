@@ -111,4 +111,101 @@ DBMS_OUTPUT.PUT_LINE('새로운 데이터 삽입 성공');
 END;
 
 
+DECLARE
+ v_record   dept%ROWTYPE;
+ v_loc  dept.loc%TYPE :='BOSTON';
+BEGIN
+ SELECT *
+ INTO   v_record
+ FROM dept
+ WHERE loc = UPPER(v_loc);
+ DBMS_OUTPUT.PUT_LINE('부서번호' ||' '|| '부서번호' || ' '|| '부서위치');
+ DBMS_OUTPUT.PUT_LINE('----------------------------------------------');
+ DBMS_OUTPUT.PUT_LINE(v_record.deptno||' ' || v_record.dname || ' ' || v_record.loc);
+END;
+
+
+ACCEPT p_hakbun PROMPT '학번 : ';
+DECLARE
+ v_hakbun   student.hakbun%TYPE :=&p_hakbun;
+ v_record   student%ROWTYPE;
+BEGIN
+ SELECT *
+ INTO v_record
+ FROM student
+ WHERE hakbun = v_hakbun;
+ 
+ DBMS_OUTPUT.PUT_LINE('학번'||CHR(32)||'이름'||CHR(32)||'총점'||CHR(32)||'평균'||CHR(32)||'평점');
+ DBMS_OUTPUT.PUT_LINE('----------------------------------------------------------------------');
+ DBMS_OUTPUT.PUT_LINE(v_record.hakbun||CHR(32)||v_record.irum||CHR(32)||v_record.sum||CHR(32)||v_record.avg||CHR(32)||v_record.grade);
+END;
+
+DECLARE
+ TYPE ENAME_TALBE_TYPE IS TABLE OF emp.ename%TYPE --array 같은 느낌. 이름으로 구성되어있는 1차원 배열
+ INDEX BY BINARY_INTEGER;
+ TYPE JOB_TALBE_TYPE IS TABLE OF emp.job%TYPE
+ INDEX BY BINARY_INTEGER;
+ v_ename    ENAME_TALBE_TYPE;
+ v_job      JOB_TALBE_TYPE;
+ su         BINARY_INTEGER := 0; --초기값
+BEGIN
+ FOR a IN(SELECT ename,job FROM emp)LOOP
+    su := su + 1;
+    v_ename(su) := a.ename;
+    v_job(su) := a.job;
+ END LOOP;
+ 
+ DBMS_OUTPUT.PUT_LINE('사원이름'||CHR(32)||CHR(32)||'업무');
+ DBMS_OUTPUT.PUT_LINE('------------------------');
+ FOR b IN 1..su LOOP
+    DBMS_OUTPUT.PUT_LINE(v_ename(b) ||CHR(32)||CHR(32)||v_job(b));
+ END LOOP;
+END;
+
+
+ACCEPT p_gender PROMPT '귀하의 성별은(M/F): ';
+DECLARE
+ v_gender  CHAR(1) :='&p_gender';
+BEGIN
+ IF v_gender ='M' THEN
+    DBMS_OUTPUT.PUT_LINE('블루~');
+ ELSE
+    DBMS_OUTPUT.PUT_LINE('핑크~');
+ END IF;
+END;
+
+DECLARE
+ j  NUMBER(2) := 0;
+BEGIN
+ LOOP
+  j := j+1;
+  DBMS_OUTPUT.PUT(j||CHR(32));
+  IF j = 10 THEN
+   EXIT;
+  END IF;
+ END LOOP;
+ DBMS_OUTPUT.PUT_LINE('');
+END;
+
+DECLARE
+ K  NUMBER :=0;
+BEGIN
+ WHILE K <10 LOOP
+  K := K+1;
+  DBMS_OUTPUT.PUT(K ||'  ');
+ END LOOP;
+ DBMS_OUTPUT.PUT_LINE('');
+END;
+
+
+DECLARE
+ K  NUMBER := 0;
+BEGIN
+ FOR K IN 1..10 LOOP
+  DBMS_OUTPUT.PUT(K || '  ');
+ END LOOP;
+ DBMS_OUTPUT.PUT_LINE('');
+END;
+
+
 
